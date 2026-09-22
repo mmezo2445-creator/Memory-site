@@ -459,7 +459,7 @@ function renderMemoryFlow(data){
   urls.forEach((url,i)=>{
     const wrap=document.createElement('div');
     const img=document.createElement('img'); img.src=url; img.loading='lazy'; img.alt='صورة ذكرى';
-    img.onclick=()=>openLightbox(urls,i);
+    img.onclick=e=>{e.stopPropagation();openLightbox(urls,i)};
     wrap.appendChild(img);
     if(captions[i]){const p=document.createElement('div');p.className='message';p.textContent=captions[i];wrap.appendChild(p);}
     gallery.appendChild(wrap);
