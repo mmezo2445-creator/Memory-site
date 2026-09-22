@@ -43,7 +43,7 @@ button:disabled{opacity:.6;cursor:not-allowed}.heart{font-size:52px;animation:be
 @keyframes flowerFade{0%{opacity:0}12%{opacity:1}78%{opacity:1}100%{opacity:0}}
 .photo-caption{margin-top:6px;width:100%;padding:9px 10px;border-radius:12px;font-size:14px}
 .photo-caption-wrap{margin-bottom:2px}
-.photo-caption-display{margin-top:-8px;margin-bottom:2px;padding:8px 12px;background:#fff8;border-radius:14px;color:#795061;font-size:16px;line-height:1.7}
+.photo-caption-display{margin:0}.gallery .photo-wrap{position:relative;overflow:hidden;border-radius:23px;background:#2a111d}.gallery .photo-wrap:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,#160b1290);pointer-events:none}.gallery .photo-wrap img{margin:0}.gallery .photo-caption-display{position:absolute;z-index:3;right:14px;left:14px;bottom:13px;margin:0;padding:9px 12px;color:#fff;background:#24111ad1;border:1px solid #ffffff3d;border-radius:14px;line-height:1.55;font-size:15px;text-align:center;backdrop-filter:blur(5px);box-shadow:0 7px 20px #0003}
 .gallery{display:flex;flex-direction:column;gap:18px;margin:22px 0}.gallery img{display:block;width:100%;height:auto;max-height:520px;object-fit:cover;border-radius:22px;box-shadow:0 10px 26px #a74e6b24;border:4px solid #fff;cursor:zoom-in}
 .photo-picker{display:block;border:2px dashed #d98aaa;background:#fff8fB;color:#a84d70;border-radius:20px;padding:18px 14px;margin-top:14px;cursor:pointer;font-weight:bold;font-size:17px;transition:.2s}
 .photo-picker:hover{transform:translateY(-1px);background:#fff}
@@ -51,10 +51,10 @@ button:disabled{opacity:.6;cursor:not-allowed}.heart{font-size:52px;animation:be
 .photo-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
 .preview-item{position:relative}.preview-item img{width:100%;height:110px;object-fit:cover;border-radius:14px;border:3px solid #fff;box-shadow:0 5px 14px #a74e6b22}
 .preview-item button{position:absolute;top:4px;right:4px;width:30px;height:30px;padding:0;border-radius:50%;background:#fff;color:#a84d70;border:1px solid #f0c7d6;font-size:16px;box-shadow:0 3px 8px #0002}
-.lightbox{position:fixed;inset:0;background:#2a1620e8;display:none;align-items:center;justify-content:center;z-index:50;padding:18px}
-.lightbox.open{display:flex}.lightbox img{max-width:96vw;max-height:88vh;object-fit:contain;border-radius:18px;box-shadow:0 15px 50px #0008}
-.lightbox button{position:absolute;background:#fff;color:#8d4562;border:0;width:44px;height:44px;padding:0;border-radius:50%;font-size:24px;z-index:51}
-.lightbox-close{top:18px;right:18px}.lightbox-prev{left:18px}.lightbox-next{right:18px}
+.countdown{display:flex;flex-direction:row;direction:ltr;gap:7px;margin:20px 0;padding:8px;border-radius:22px;background:linear-gradient(135deg,#ffffffcc,#fff1f7cc);border:1px solid #fff;box-shadow:0 10px 28px #7d36551c}.count-box{direction:rtl;flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:82px;padding:8px 3px;background:#fff;border:1px solid #f0c8d7;border-radius:16px}.count-box strong{font-size:22px;line-height:1.05;color:#8b3e5e;font-weight:800}.count-box span{font-size:10px;color:#936477;font-weight:bold}.lightbox{position:fixed;inset:0;background:#2a1620e8;display:none;align-items:center;justify-content:center;z-index:400;padding:18px;touch-action:none}
+.lightbox.open{display:flex}.lightbox img{max-width:92vw;max-height:82vh;object-fit:contain;border-radius:18px;box-shadow:0 15px 50px #0008;user-select:none;-webkit-user-drag:none}
+.lightbox button{position:absolute;background:#fff;color:#8d4562;border:0;width:52px;height:52px;padding:0;border-radius:50%;font-size:28px;z-index:410;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px #0005}
+.lightbox-close{top:18px;right:18px}.lightbox-prev{left:14px;top:50%;transform:translateY(-50%)}.lightbox-next{right:14px;top:50%;transform:translateY(-50%)}
 .music{margin:18px 0;padding:14px;background:#fff8;border-radius:18px;border:1px solid #f0c7d6}.music-title{font-weight:bold;color:#a84d70;margin-bottom:8px}.music audio{width:100%}
 .float{position:fixed;bottom:-30px;font-size:25px;animation:up 5s linear forwards;pointer-events:none;z-index:2}.error{background:#ffe1e1;color:#8b0000;padding:12px;border-radius:12px;margin-top:12px;display:none}.loading{display:none;margin-top:15px;color:#a84d70}
 .small-note{font-size:13px;color:#8d6474;margin-top:7px}
@@ -242,11 +242,17 @@ function changeLightbox(step){
   $('lightboxImg').src=lightboxUrls[lightboxIndex];
 }
 $('lightbox').addEventListener('click',(e)=>{if(e.target===$('lightbox'))closeLightbox();});
+$('lightbox').querySelector('.lightbox-close').addEventListener('click',e=>{e.stopPropagation();closeLightbox()});
+$('lightbox').querySelector('.lightbox-prev').addEventListener('click',e=>{e.stopPropagation();changeLightbox(-1)});
+$('lightbox').querySelector('.lightbox-next').addEventListener('click',e=>{e.stopPropagation();changeLightbox(1)});
+let touchStartX=0;
+$('lightbox').addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].screenX},{passive:true});
+$('lightbox').addEventListener('touchend',e=>{const dx=e.changedTouches[0].screenX-touchStartX;if(Math.abs(dx)>45)changeLightbox(dx<0?1:-1)},{passive:true});
 document.addEventListener('keydown',(e)=>{
   if(!$('lightbox').classList.contains('open'))return;
   if(e.key==='Escape')closeLightbox();
-  if(e.key==='ArrowLeft')changeLightbox(1);
-  if(e.key==='ArrowRight')changeLightbox(-1);
+  if(e.key==='ArrowLeft')changeLightbox(-1);
+  if(e.key==='ArrowRight')changeLightbox(1);
 });
 
 async function sha256(text){
@@ -458,10 +464,11 @@ function renderMemoryFlow(data){
   const gallery=$('flowGallery');
   urls.forEach((url,i)=>{
     const wrap=document.createElement('div');
+    wrap.className='photo-wrap';
     const img=document.createElement('img'); img.src=url; img.loading='lazy'; img.alt='صورة ذكرى';
     img.onclick=e=>{e.stopPropagation();openLightbox(urls,i)};
     wrap.appendChild(img);
-    if(captions[i]){const p=document.createElement('div');p.className='message';p.textContent=captions[i];wrap.appendChild(p);}
+    if(captions[i]){const p=document.createElement('div');p.className='photo-caption-display';p.textContent=captions[i];wrap.appendChild(p);}
     gallery.appendChild(wrap);
   });
 
