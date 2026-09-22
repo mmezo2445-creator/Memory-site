@@ -84,6 +84,65 @@ button:disabled{opacity:.6;cursor:not-allowed}.heart{font-size:52px;animation:be
 .memory-page-section{animation:pageIn .45s ease}
 @keyframes pageIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
 
+
+/* ===== ROMANTIC LUXURY THEME ===== */
+:root{--lux-bg:#10070b;--lux-panel:#1b0d13;--lux-panel2:#241119;--lux-burg:#7e1838;--lux-red:#9f2d4e;--lux-gold:#d7b56d;--lux-gold2:#f0d89a;--lux-cream:#f7ead0;--lux-muted:#c8aeb7}
+html,body{background:var(--lux-bg);color:var(--lux-cream)}
+body{background:
+ radial-gradient(circle at 15% 12%,#7d18381f 0 1px,transparent 2px),
+ radial-gradient(circle at 84% 18%,#d7b56d20 0 1.4px,transparent 2px),
+ radial-gradient(circle at 72% 78%,#9f2d4e18 0 1.3px,transparent 2px),
+ radial-gradient(ellipse at 50% -20%,#6c17331f,transparent 55%),
+ linear-gradient(145deg,#0d0609 0%,#170a10 48%,#0b0508 100%);
+ background-size:180px 180px,220px 220px,260px 260px,100% 100%,100% 100%;}
+body:before,body:after{color:#d7b56d22;font-size:17px;letter-spacing:28px;line-height:95px}
+.box{background:linear-gradient(145deg,#211018f2,#140a0ff2)!important;border:1px solid #d7b56d45!important;border-radius:30px;box-shadow:0 25px 70px #000b,0 0 0 1px #ffffff06 inset,0 0 55px #8e1d3d18;backdrop-filter:blur(18px);padding:30px}
+.box:before{content:"";display:block;height:1px;width:76px;margin:0 auto 18px;background:linear-gradient(90deg,transparent,var(--lux-gold),transparent);opacity:.8}
+h1,.unlock-title{color:var(--lux-gold2)!important;text-shadow:0 0 20px #d7b56d18}
+h1{font-family:Georgia,serif;letter-spacing:.3px}
+p,.unlock-subtitle,.small-note{color:var(--lux-muted)!important}
+input,textarea{background:#0e070bf0!important;color:var(--lux-cream)!important;border:1px solid #d7b56d42!important;box-shadow:inset 0 0 20px #0005!important}
+input::placeholder,textarea::placeholder{color:#9d858d}
+input:focus,textarea:focus{border-color:var(--lux-gold)!important;box-shadow:0 0 0 3px #d7b56d12,0 0 25px #d7b56d0e!important}
+button{background:linear-gradient(135deg,#8e1d3d,#5d102a)!important;color:#fff8eb!important;border:1px solid #d7b56d55!important;box-shadow:0 12px 28px #0008,0 0 18px #9f2d4e18!important;transition:transform .2s ease,box-shadow .2s ease,filter .2s ease}
+button:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 16px 32px #0009,0 0 24px #d7b56d12!important}
+.heart,.heart-eyes{filter:drop-shadow(0 0 16px #b52e5028)}
+.message,.memory-message{background:linear-gradient(145deg,#26121af2,#170b11f2)!important;color:#f3dfc6!important;border:1px solid #d7b56d30!important;box-shadow:0 12px 35px #0006,inset 0 1px #ffffff08}
+.memory-message{position:relative}
+.memory-message:before{content:'“';position:absolute;right:12px;top:-12px;font:52px Georgia;color:#d7b56d55}
+.dates .date-card,.timer-card,.music{background:linear-gradient(145deg,#241119,#170b10)!important;border:1px solid #d7b56d35!important;color:var(--lux-cream);box-shadow:0 12px 30px #0006}
+.date-card b,.timer-title,.music-title{color:var(--lux-gold2)!important}
+.countdown{background:linear-gradient(145deg,#211018,#13090e)!important;border:1px solid #d7b56d38!important;box-shadow:0 15px 35px #0007!important}
+.count-box{background:linear-gradient(160deg,#2b151d,#170a10)!important;border:1px solid #d7b56d45!important;box-shadow:inset 0 1px #fff08}
+.count-box strong{color:var(--lux-gold2)!important;text-shadow:0 0 14px #d7b56d20}
+.count-box span{color:#c9a8b3!important}
+.gallery{gap:28px;margin:26px 0}
+.gallery .photo-wrap{border-radius:26px;background:#0b0609;border:1px solid #d7b56d55;box-shadow:0 20px 50px #0009,0 0 0 5px #d7b56d08;}
+.gallery .photo-wrap:before{content:"";position:absolute;inset:7px;border:1px solid #d7b56d35;border-radius:20px;z-index:2;pointer-events:none}
+.gallery .photo-wrap img{width:100%;height:auto;max-height:620px;object-fit:contain;background:#090507;border-radius:25px;display:block;}
+.gallery .photo-caption-display{right:18px;left:18px;bottom:17px;background:linear-gradient(180deg,#12070ad9,#080406ed)!important;border:1px solid #d7b56d66!important;color:#f9ead3!important;border-radius:17px!important;padding:12px 15px!important;box-shadow:0 10px 30px #0009!important;font-family:Georgia,serif;font-size:15px!important}
+.gallery .photo-caption-display:before{content:'✦  ';color:var(--lux-gold);}
+.photo-picker{border:1px dashed #d7b56d77!important;background:#1c0d13!important;color:var(--lux-gold2)!important}
+.preview-item img{border:2px solid #d7b56d55!important;box-shadow:0 8px 20px #0007!important}
+.preview-item button{background:#160a10!important;color:var(--lux-gold2)!important;border-color:#d7b56d55!important}
+.lightbox{background:#050204f5!important;backdrop-filter:blur(8px)}
+.lightbox:before{content:"";position:absolute;inset:18px;border:1px solid #d7b56d2e;border-radius:25px;pointer-events:none}
+.lightbox img{border:1px solid #d7b56d55!important;border-radius:22px!important;box-shadow:0 25px 80px #000,0 0 0 7px #d7b56d09!important;background:#090507}
+.lightbox button{background:linear-gradient(145deg,#f1d99d,#b8944e)!important;color:#27130c!important;border:1px solid #fff0c0!important;box-shadow:0 10px 30px #000b!important}
+.envelope{background:linear-gradient(145deg,#f4e4c5,#bd8d43)!important;border:2px solid #e6c477!important;box-shadow:0 18px 40px #0009,0 0 35px #d7b56d20!important}
+.envelope:before{background:linear-gradient(135deg,transparent 49%,#7e5426 50%,transparent 51%),linear-gradient(225deg,transparent 49%,#7e5426 50%,transparent 51%)}
+.envelope-heart{filter:drop-shadow(0 4px 8px #0005)}
+.unlock-subtitle:after{content:'  ✦  ';color:var(--lux-gold)}
+.unlock-subtitle:before{content:'✦  ';color:var(--lux-gold)}
+.flow-page{animation:luxPageIn .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes luxPageIn{from{opacity:0;transform:translateY(14px) scale(.985);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+.next-btn{background:linear-gradient(135deg,#a42b4f,#65132f)!important;border-color:#d7b56d66!important}
+.roses .rose{filter:drop-shadow(0 5px 10px #0008);opacity:.7}
+.music audio{filter:sepia(.35) saturate(.7)}
+.flower-overlay.show{background:radial-gradient(circle,#4d1128e8,#080306f8)!important}
+.flower-burst{filter:drop-shadow(0 15px 35px #d7b56d44)!important}
+@media(max-width:430px){.box{width:94%;padding:23px 18px}.gallery .photo-wrap:before{inset:5px}.gallery .photo-caption-display{right:12px;left:12px;bottom:12px;font-size:14px!important}.count-box strong{font-size:20px}}
+
 </style>
 </head>
 <body>
