@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ذكرياتنا ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Arial,sans-serif;color:#fff;text-align:center;background:linear-gradient(135deg,#6a11cb,#2575fc);overflow-x:hidden}
+.box{width:92%;max-width:500px;margin:8vh auto;background:#ffffff20;padding:28px;border-radius:28px;backdrop-filter:blur(12px);box-shadow:0 15px 40px #0004}
+.emoji{font-size:60px}.memory{display:none}.memory .box{margin-top:5vh;background:#ffffff24}
+input,textarea,button{width:100%;padding:14px;margin-top:12px;border:0;border-radius:14px;font-size:16px}
+textarea{height:110px;resize:none}button{background:#fff;color:#5420a8;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.6;cursor:not-allowed}.heart{font-size:65px;animation:beat 1s infinite}
+.message{font-size:20px;line-height:1.8;margin:20px 0;white-space:pre-wrap}
+.gallery img{max-width:100%;max-height:350px;border-radius:20px}
+.float{position:fixed;bottom:-30px;font-size:25px;animation:up 5s linear forwards;pointer-events:none}
+.error{background:#ffdddd;color:#8b0000;padding:12px;border-radius:12px;margin-top:12px;display:none}
+.loading{display:none;margin-top:15px}
+@keyframes beat{50%{transform:scale(1.18)}}@keyframes up{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(-110vh);opacity:0}}
+</style>
+</head>
+<body>
+
+<div id="formPage" class="box">
+  <div class="emoji">🎁</div>
+  <h1>اعمل ذكرى مميزة</h1>
+  <p>املأ البيانات وهنجهزلك رابط خاص للذكرى ✨</p>
+  <input id="name" placeholder="اسم الشخص">
+  <input id="date" type="date">
+  <textarea id="message" placeholder="اكتب رسالة جميلة..."></textarea>
+  <input id="photo" type="file" accept="image/*">
+  <button id="createBtn" onclick="createMemory()">إنشاء الذكرى ✨</button>
+  <div id="error" class="error"></div>
+  <div id="loading" class="loading">جاري إنشاء الذكرى... ⏳</div>
+</div>
+
+<div id="memoryPage" class="memory">
+  <div class="box">
+    <div class="heart">❤️</div>
+    <h1 id="showName"></h1>
+    <div id="showDate"></div>
+    <div class="gallery"><img id="showPhoto" style="display:none" alt="صورة الذكرى"></div>
+    <div class="message" id="showMessage"></div>
+    <button onclick="sharePage()">🔗 نسخ ومشاركة الرابط</button>
+    <button onclick="newMemory()">↩️ إنشاء ذكرى جديدة</button>
+  </div>
+</div>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+/* ضع بيانات مشروع Supabase هنا */
+const SUPABASE_URL = 'https://vivzjchvymlskwamiqcd.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_sqJWaioZ5ShIonsxEpgA5Q_cYMd3Hyi';
+const BUCKET = 'memory-images';
+
+const configured = !SUPABASE_URL.includes('ضع_') && !SUPABASE_ANON_KEY.includes('ضع_');
+const supabase = configured ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+const $ = id => document.getElementById(id);
+function showError(msg){ $('error').textContent=msg; $('error').style.display='block'; }
+function clearError(){ $('error').style.display='none'; }
+
+async function createMemory(){
+  clearError();
+  if(!configured){showError('لازم تضيف بيانات Supabase في الملف أولًا. راجع README.');return;}
+
+  const name=$('name').value.trim();
+  const date=$('date').value;
+  const message=$('message').value.trim();
+  const file=$('photo').files[0];
+
+  if(!name || !date){showError('اكتب الاسم وتاريخ الميلاد الأول ❤️');return;}
+  if(file && !file.type.startsWith('image/')){showError('اختار صورة فقط.');return;}
+  if(file && file.size > 5*1024*1024){showError('حجم الصورة لازم يكون أقل من 5 ميجابايت.');return;}
+
+  $('createBtn').disabled=true;
+  $('loading').style.display='block';
+
+  try{
+    const id=crypto.randomUUID();
+    let photo_url=null;
+
+    if(file){
+      const ext=(file.name.split('.').pop() || 'jpg').replace(/[^a-z0-9]/gi,'').toLowerCase() || 'jpg';
+      const path=`${id}.${ext}`;
+      const {error:uploadError}=await supabase.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false});
+      if(uploadError) throw uploadError;
+      photo_url=supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+    }
+
+    const {error}=await supabase.from('memories').insert({
+      id,name,birthday:date,message:message || 'أتمنى لك أيام جميلة وسعيدة ❤️',photo_url
+    });
+    if(error) throw error;
+
+    location.href = `${location.origin}/m/${id}`;
+  }catch(e){
+    console.error(e);
+    showError('حصل خطأ أثناء إنشاء الذكرى. تأكد من إعداد Supabase ثم حاول مرة أخرى.');
+  }finally{
+    $('createBtn').disabled=false;
+    $('loading').style.display='none';
+  }
+}
+
+async function loadMemory(id){
+  if(!configured){showError('الموقع غير مُعدّ بعد.');return;}
+  try{
+    const {data,error}=await supabase.from('memories').select('name,birthday,message,photo_url').eq('id',id).single();
+    if(error || !data) throw error || new Error('Not found');
+
+    $('formPage').style.display='none';
+    $('memoryPage').style.display='block';
+    $('showName').textContent=`كل سنة وإنت طيب يا ${data.name} 🎂`;
+    $('showDate').textContent=`تاريخ الميلاد: ${data.birthday}`;
+    $('showMessage').textContent=data.message || '';
+    if(data.photo_url){$('showPhoto').src=data.photo_url;$('showPhoto').style.display='block';}
+  }catch(e){
+    showError('الذكرى دي مش موجودة أو الرابط غير صحيح.');
+  }
+}
+
+function newMemory(){ location.href=location.origin; }
+
+async function sharePage(){
+  const url=location.href;
+  try{
+    await navigator.clipboard.writeText(url);
+    alert('تم نسخ رابط الذكرى 🔗❤️');
+  }catch{
+    if(navigator.share){try{await navigator.share({title:'ذكرى جميلة ❤️',text:'شوف الذكرى دي 🎂✨',url})}catch{}}
+    else alert(url);
+  }
+}
+
+function createHeart(){
+  const h=document.createElement('div');h.className='float';
+  h.textContent=['❤️','💖','💕','✨','💗'][Math.floor(Math.random()*5)];
+  h.style.left=Math.random()*100+'%';
+  h.style.animationDuration=(3+Math.random()*4)+'s';
+  document.body.appendChild(h);setTimeout(()=>h.remove(),7000);
+}
+setInterval(createHeart,500);
+
+window.createMemory=createMemory;
+window.newMemory=newMemory;
+window.sharePage=sharePage;
+
+const match=location.pathname.match(/^\/m\/([0-9a-f-]{36})\/?$/i);
+if(match) loadMemory(match[1]);
+</script>
+</body>
+</html>
