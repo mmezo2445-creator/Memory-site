@@ -143,6 +143,51 @@ button:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 16px
 .flower-burst{filter:drop-shadow(0 15px 35px #d7b56d44)!important}
 @media(max-width:430px){.box{width:94%;padding:23px 18px}.gallery .photo-wrap:before{inset:5px}.gallery .photo-caption-display{right:12px;left:12px;bottom:12px;font-size:14px!important}.count-box strong{font-size:20px}}
 
+
+/* Creative luxury music dock */
+.music-dock{position:fixed;left:14px;right:14px;bottom:14px;z-index:350;display:flex;align-items:center;gap:11px;direction:ltr;padding:9px 12px 9px 9px;background:linear-gradient(135deg,#16090fef,#2a101bf2);border:1px solid #d7b56d66;border-radius:22px;box-shadow:0 14px 40px #000b,0 0 30px #d7b56d14;backdrop-filter:blur(12px)}.music-dock .record{flex:0 0 54px;width:54px;height:54px;border-radius:50%;position:relative;background:radial-gradient(circle,#f3dfb0 0 6px,#7b1739 7px 11px,#12070b 12px 25px,#050304 26px 100%);border:2px solid #d7b56d99;box-shadow:0 0 18px #d7b56d2b,0 5px 15px #0009;animation:spinRecord 3.2s linear infinite;animation-play-state:paused}.music-dock.playing .record{animation-play-state:running}.music-dock .record:after{content:'♥';position:absolute;inset:0;display:grid;place-items:center;font-size:10px;color:#d7b56d}.box{padding-bottom:96px!important}.music-dock .music-info{direction:rtl;text-align:right;min-width:78px}.music-dock .music-info b{display:block;color:#f3dfc6;font-size:13px}.music-dock .music-info span{display:block;color:#caa97a;font-size:10px;margin-top:2px}.music-dock audio{height:34px;min-width:0;flex:1;filter:sepia(.5) saturate(.7)}.music-dock .music-note{font-size:18px;color:#d7b56d;animation:pulseMusic 1.2s ease-in-out infinite}@keyframes spinRecord{to{transform:rotate(360deg)}}@keyframes pulseMusic{50%{transform:scale(1.2);opacity:.65}}
+.typewriter{font-family:"Courier New",monospace!important;text-align:right;direction:rtl;white-space:pre-wrap}.typewriter.typing:after{content:' ';display:inline-block;width:2px;height:1.05em;margin-right:3px;vertical-align:-2px;background:#d7b56d;animation:cursorBlink .7s steps(1) infinite}@keyframes cursorBlink{50%{opacity:0}}
+@media(max-width:430px){.music-dock{left:8px;right:8px;bottom:8px;gap:7px;padding:8px}.music-dock .record{flex-basis:46px;width:46px;height:46px}.music-dock .music-info{min-width:66px}.music-dock .music-info b{font-size:11px}.music-dock .music-info span{font-size:9px}.music-dock audio{height:30px}}
+</style>
+
+<style id="final-luxury-polish">
+html,body{background:#090609!important;color:#f7ead0!important;font-family:Georgia,"Times New Roman",serif!important}
+body{background-image:radial-gradient(circle at 50% -10%,#5a1834 0,transparent 36%),radial-gradient(circle at 10% 80%,#32101e 0,transparent 28%),linear-gradient(145deg,#080609,#160a11 55%,#090609)!important}
+body:before{content:"✦   ✧      ✦        ·        ✧      ✦"!important;color:#d7b56d44!important;font-size:18px!important;line-height:120px!important;letter-spacing:24px!important;animation:luxStars 7s ease-in-out infinite!important}
+body:after{content:""!important;background:radial-gradient(circle at 50% 0,#d7b56d0c,transparent 45%)!important}
+@keyframes luxStars{50%{opacity:.35;transform:translateY(8px)}}
+#formPage{background:linear-gradient(145deg,#1b0d13f5,#0d080cf5)!important;border:1px solid #d7b56d55!important;box-shadow:0 35px 100px #000b,0 0 50px #d7b56d0c!important;overflow:hidden}
+#formPage:before{content:"";position:absolute;inset:10px;border:1px solid #d7b56d22;border-radius:22px;pointer-events:none}
+#formPage .emoji{filter:drop-shadow(0 8px 15px #0008)}
+#formPage h1{font-size:31px!important;color:#f0d89a!important}
+#formPage p{color:#c8aeb7!important}
+#formPage input,#formPage textarea{background:#090609cc!important;border-color:#d7b56d33!important;color:#fff3dd!important;border-radius:15px!important}
+#formPage input:focus,#formPage textarea:focus{border-color:#d7b56d88!important;box-shadow:0 0 0 3px #d7b56d14!important}
+#formPage button{background:linear-gradient(135deg,#c89b4f,#7e1838)!important;color:#fff5df!important;border:1px solid #e8c97877!important}
+.unlock-title{color:#f0d89a!important;font-family:Georgia,serif!important;letter-spacing:.5px}
+.unlock-subtitle{color:#c8aeb7!important}
+.timer-card{background:linear-gradient(145deg,#211019,#10080d)!important;border-color:#d7b56d33!important;box-shadow:0 18px 45px #0008!important}
+.timer-title{color:#f0d89a!important}
+.timer-unit{background:#0b070acc!important;border-color:#d7b56d2c!important}
+.timer-unit b{color:#f0d89a!important}.timer-unit span{color:#bda7ae!important}
+.memory .box{background:linear-gradient(145deg,#1b0d13f5,#0d080cf5)!important;border-color:#d7b56d44!important;box-shadow:0 35px 100px #000b!important}
+.flow-page h1{color:#f0d89a!important}.flow-page .heart{filter:drop-shadow(0 10px 22px #d7b56d20)}
+.typewriter{font-family:"Courier New",Consolas,monospace!important;color:#f7ead0!important;background:linear-gradient(145deg,#12090eaa,#24101a66)!important;border:1px solid #d7b56d25!important;border-radius:18px!important;padding:18px!important;text-align:right!important;box-shadow:inset 0 1px #fff1!important}
+.typewriter.typing:after{background:#f0d89a!important}
+.countdown{background:linear-gradient(145deg,#211019,#10080d)!important;border-color:#d7b56d33!important;box-shadow:0 18px 45px #0008!important}
+.count-box{background:linear-gradient(180deg,#21121a,#10080d)!important;border-color:#d7b56d2c!important;box-shadow:inset 0 1px #fff1!important}
+.count-box strong{color:#f0d89a!important}.count-box span{color:#bda7ae!important}
+.next-btn{background:linear-gradient(135deg,#c89b4f,#7e1838)!important;color:#fff5df!important;border:1px solid #e8c97877!important}
+.music-dock{background:linear-gradient(135deg,#10070cef,#24101af5)!important;border-color:#d7b56d66!important;box-shadow:0 18px 55px #000c,0 0 35px #d7b56d10!important}
+.music-dock .music-info b{color:#f0d89a!important}.music-dock .music-info span{color:#bda7ae!important}.music-dock .record{border-color:#d7b56dbb!important}
+.gallery .photo-wrap{background:#070507!important;border-color:#d7b56d66!important;box-shadow:0 25px 65px #000b!important;transform:translateZ(0);transition:transform .25s ease,box-shadow .25s ease}
+.gallery .photo-wrap:hover{transform:translateY(-3px);box-shadow:0 30px 75px #000c,0 0 28px #d7b56d10!important}
+.gallery .photo-wrap img{border:0!important}
+.gallery .photo-caption-display{font-family:Georgia,serif!important;color:#f7ead0!important;background:linear-gradient(180deg,#0a0508b8,#080406f2)!important;border-color:#d7b56d55!important}
+.lightbox{background:#030204f7!important}.lightbox button{background:linear-gradient(145deg,#f1d99d,#b8944e)!important}
+.photo-picker{background:#120a0f!important;border-color:#d7b56d66!important;color:#f0d89a!important}
+.roses .rose{opacity:.55!important;filter:drop-shadow(0 8px 15px #0009) sepia(.3)}
+@media(max-width:430px){#formPage h1{font-size:26px!important}.typewriter{font-size:16px!important;padding:14px!important}.music-dock{bottom:7px!important}}
 </style>
 </head>
 <body>
@@ -499,9 +544,14 @@ function renderMemoryFlow(data){
         <div class="count-box"><strong id="cdMinutes">0</strong><span>دقيقة</span></div>
         <div class="count-box"><strong id="cdSeconds">0</strong><span>ثانية</span></div>
       </div>
-      <audio id="musicPlayer" controls loop autoplay>
-        <source src="https://amrdiab.net/wp-content/uploads/2019/04/wayah.mp3" type="audio/mpeg">
-      </audio>
+      <div class="music-dock" id="musicDock">
+        <div class="record" aria-hidden="true"></div>
+        <div class="music-info"><b>ذكرياتنا</b><span>♪ موسيقى الذكرى</span></div>
+        <div class="music-note">♪</div>
+        <audio id="musicPlayer" controls loop autoplay>
+          <source src="https://amrdiab.net/wp-content/uploads/2019/04/wayah.mp3" type="audio/mpeg">
+        </audio>
+      </div>
       <button class="next-btn" onclick="goPage(2)">التالي ➡️</button>
     </section>
     <section id="page2" class="flow-page">
@@ -517,8 +567,13 @@ function renderMemoryFlow(data){
     </section>
   </div>`;
 
-  $('firstMsg').textContent='😍 '+(data.message||'أجمل ذكرى ❤️');
-  $('finalMsg').textContent=data.final_message||'❤️';
+  const firstText='😍 '+(data.message||'أجمل ذكرى ❤️');
+  const finalText=data.final_message||'❤️';
+  $('firstMsg').classList.add('typewriter'); $('finalMsg').classList.add('typewriter');
+  function typeWriter(el,text,speed=30){el.textContent='';el.classList.add('typing');let i=0;const tick=()=>{if(i<text.length){el.textContent+=text[i++];setTimeout(tick,speed)}else el.classList.remove('typing')};tick()}
+  typeWriter($('firstMsg'),firstText); typeWriter($('finalMsg'),finalText);
+  const music=$('musicPlayer'),dock=$('musicDock');
+  if(music&&dock){const sync=()=>dock.classList.toggle('playing',!music.paused);music.addEventListener('play',sync);music.addEventListener('pause',sync);music.addEventListener('ended',sync);sync();music.addEventListener('loadedmetadata',()=>{if(music.currentTime<1)music.currentTime=55},{once:true});music.play().catch(()=>{})}
 
   const gallery=$('flowGallery');
   urls.forEach((url,i)=>{
@@ -545,6 +600,8 @@ function renderMemoryFlow(data){
   tick(); setInterval(tick,1000);
 
   const player=$('musicPlayer');
+  const dock=$('musicDock');
+  if(player&&dock){const sync=()=>dock.classList.toggle('playing',!player.paused);player.addEventListener('play',sync);player.addEventListener('pause',sync);player.addEventListener('ended',sync);sync();}
   player.addEventListener('loadedmetadata',()=>{player.currentTime=55;player.play().catch(()=>{});},{once:true});
   player.play().catch(()=>{});
 }
